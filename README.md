@@ -1,155 +1,89 @@
-🎓 Sistema Escolar API
+🎓 Sistema Escolar - Backend
 
-API REST de um Sistema Escolar desenvolvida com Spring Boot, seguindo boas práticas de arquitetura como DTO Pattern, camadas Service/Repository, e uso de Lombok para reduzir código boilerplate.
+Backend de um sistema escolar desenvolvido com Spring Boot, utilizando boas práticas de arquitetura, integração com banco de dados MySQL e containerização com Docker.
 
-Este projeto simula o backend de um sistema acadêmico, permitindo o gerenciamento de alunos, professores, disciplinas, turmas e matrículas.
-
-🚀 Tecnologias Utilizadas
-
-☕ Java 17
-
+🚀 Tecnologias utilizadas
+☕ Java 21
 🌱 Spring Boot
-
 📦 Spring Data JPA
-
 🐬 MySQL
+📄 Swagger (OpenAPI)
+🧰 Lombok
+🐳 Docker
+📁 Estrutura do projeto
+src/
+ ├── controller
+ ├── service
+ ├── repository
+ ├── dto
+ ├── model
+ └── config
+🧠 Arquitetura
 
-🧩 Lombok
+O projeto segue o padrão:
 
-🔄 DTO Pattern
+Controller → Service → Repository → Database
 
-🧱 Arquitetura em Camadas
+E utiliza DTOs para comunicação com a API, evitando exposição direta das entidades.
 
-🛠 Maven
+⚙️ Funcionalidades atuais
+✅ Cadastro de alunos
+✅ Listagem de alunos
+✅ Integração com banco de dados MySQL
+✅ Documentação automática com Swagger
+✅ Validação de dados
+✅ Estrutura pronta para expansão
+🐳 Executando com Docker
+1️⃣ Gerar o JAR
+mvn clean package
+2️⃣ Build da imagem
+docker build -t sistema-escolar .
+3️⃣ Rodar o container
+docker run -d -p 8080:8080 --name api-escola sistema-escolar
+🐬 Banco de Dados (MySQL)
 
-🌐 REST API
+Para rodar o MySQL via Docker:
 
-🏗 Arquitetura do Projeto
-
-O projeto segue a arquitetura em camadas utilizada em aplicações Java modernas.
-
-src/main/java/com/escola
-
-controller   → Camada de API REST
-service      → Regras de negócio
-repository   → Comunicação com banco de dados
-model        → Entidades JPA
-dto          → Objetos de transferência de dados
-📚 Entidades do Sistema
-
-O sistema possui as seguintes entidades principais:
-
-👨‍🎓 Aluno
-
-👨‍🏫 Professor
-
-📖 Disciplina
-
-🏫 Turma
-
-📝 Matrícula
-
-📊 Nota
-
-⚙️ Configuração do Banco de Dados
-
-Crie o banco no MySQL:
-
-CREATE DATABASE escola_db;
-
-Configure o arquivo:
-
-src/main/resources/application.properties
-
-Exemplo:
-
-spring.datasource.url=jdbc:mysql
+docker run -d \
+--name mysql-escola \
+-e MYSQL_ROOT_PASSWORD=root \
+-e MYSQL_DATABASE=escola \
+-p 3306:3306 \
+mysql:8
+⚙️ Configuração do application.properties
+spring.datasource.url=jdbc:mysql://localhost:3306/escola
 spring.datasource.username=root
-spring.datasource.password=sua_senha
+spring.datasource.password=root
 
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
-spring.jpa.properties.hibernate.format_sql=true
-▶️ Executando o Projeto
+📄 Documentação da API (Swagger)
 
-Clone o repositório:
+Após iniciar o projeto, acesse:
 
-git clone https://github.com/Lcvianasz/Sistema-Escolar.git
-
-Entre na pasta do projeto:
-
-cd Sistema-Escolar
-
-Execute o projeto:
-
-mvn spring-boot:run
-
-A aplicação será iniciada em:
-
-http://localhost:8080
-🔗 Endpoints da API
-Criar aluno
-
-POST
-
-/alunos
-
-Exemplo de JSON:
-
+http://localhost:8080/swagger-ui/index.html
+🔌 Endpoints disponíveis
+📌 Alunos
+Método	Endpoint	Descrição
+GET	/alunos	Listar alunos
+POST	/alunos	Cadastrar aluno
+📦 Exemplo de requisição
+POST /alunos
 {
- "nome": "Lucas",
- "email": "lucas@email.com",
- "matricula": "2025001",
- "idade": 20
+  "nome": "Lucas",
+  "idade": 20,
+  "email": "lucas@email.com"
 }
-Listar alunos
-
-GET
-
-/alunos
-Deletar aluno
-
-DELETE
-
-/alunos/{id}
-📦 Estrutura do Projeto
-Sistema-Escolar
-│
-├── src
-│   ├── main
-│   │   ├── java/com/escola
-│   │   │   ├── controller
-│   │   │   ├── service
-│   │   │   ├── repository
-│   │   │   ├── model
-│   │   │   └── dto
-│   │   │
-│   │   └── resources
-│   │
-│   └── test
-│
-├── pom.xml
-└── README.md
-📈 Melhorias Futuras
-
+📌 Boas práticas aplicadas
+Separação de camadas (Controller, Service, Repository)
+Uso de DTO
+Validação com Bean Validation
+Código limpo e organizado
+Containerização com Docker
+🚧 Próximas melhorias
 🔐 Autenticação com JWT
-
-📑 Documentação com Swagger
-
-🐳 Containerização com Docker
-
+👨‍🏫 CRUD de Professores
+📚 CRUD de Cursos
+🧾 Sistema de Matrículas
 📊 Paginação e filtros
-
 🧪 Testes automatizados
-
-☁ Deploy em AWS / Render / Railway
-
-👨‍💻 Autor
-
-Desenvolvido por Lucas Viana Souza
-
-GitHub
-https://github.com/Lcvianasz
-
-LinkedIn
-https://www.linkedin.com/in/lucas-viana-souza-65b3aa3ab/
