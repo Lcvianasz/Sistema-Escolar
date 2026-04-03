@@ -1,7 +1,6 @@
 package com.escola.sistema.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.*;
 import lombok.*;
 
 @Entity
@@ -9,13 +8,10 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Matricula {
+public class Materia {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    private Aluno aluno;
-    @ManyToOne
-    private Turma turma;
-
+    private String nome;
 }

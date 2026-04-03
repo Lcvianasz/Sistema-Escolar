@@ -1,7 +1,9 @@
 package com.escola.sistema.controller;
 
 import com.escola.sistema.dto.AlunoDTO;
+import com.escola.sistema.dto.BoletimDTO;
 import com.escola.sistema.model.Aluno;
+import com.escola.sistema.service.BoletimService;
 import jakarta.validation.Valid;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -14,11 +16,13 @@ import lombok.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/alunos")
 @RequiredArgsConstructor
 public class AlunoController {
 
     private final AlunoService alunoService;
+    private final BoletimService boletimService;
 
     @Operation(summary = "Cadastrar Aluno")
     @PostMapping
@@ -48,5 +52,10 @@ public class AlunoController {
     @DeleteMapping("/{id}")
     public void deletar(@PathVariable Long id){
         alunoService.deletar(id);
+    }
+
+    @GetMapping("/{id}/boletim")
+    public List<BoletimDTO> getBoletim(@PathVariable Long id){
+        return boletimService.buscarBoletim(id);
     }
 }

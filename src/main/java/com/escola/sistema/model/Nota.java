@@ -16,7 +16,9 @@ public class Nota {
     private  Double valor;
     private Integer bimestre;
     @ManyToOne
+    @JoinColumn(name = "aluno_id")
     private Aluno aluno;
     @ManyToOne
+    @JoinColumn(name = "disciplina_id")
     private Disciplina disciplina;
 }
