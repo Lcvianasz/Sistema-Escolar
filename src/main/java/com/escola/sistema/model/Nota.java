@@ -21,4 +21,5 @@ public class Nota {
     @ManyToOne
     @JoinColumn(name = "disciplina_id")
     private Disciplina disciplina;
+    private Integer faltas;
 }
